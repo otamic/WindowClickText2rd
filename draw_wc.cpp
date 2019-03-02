@@ -130,13 +130,13 @@ void text_draw_info(Tag tag) {
     glRasterPos2i(10, 90);
     switch(tag) {
         case line_wc:
-            drawString("draw a line_wc");
+            drawString("draw a line");
             break;
         case rectangle_wc:
-            drawString("draw a rectangle_wc");
+            drawString("draw a rectangle");
             break;
         case round_wc:
-            drawString("draw a round_wc");
+            drawString("draw a round");
             break;
         default:
             drawString("draw nothing");
