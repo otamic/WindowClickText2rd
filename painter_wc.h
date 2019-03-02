@@ -12,7 +12,7 @@
 #include "paper_wc.h"
 #include "button_wc.h"
 
-void setPixel (const Paper & pap, int x, int y);
+void setPixel (const Paper & pap, int x, int y, Color_wc col);
 //void lineDDA (Paper & pap, int xs, int ys, int xe, int ye);
 void lineBres (Paper & pap, const Button & but);
 void roudBres (Paper & pap, const Button & but);

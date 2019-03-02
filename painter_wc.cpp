@@ -6,9 +6,12 @@
 
 #include <cstring>
 
-void setPixel (const Paper & pap, int x, int y) {
-    if (y >= 0 && y < pap.paperHeight && x >= 0 && x < pap.paperWidth)
-        pap.paper[y][x] = 1;
+void setPixel (const Paper & pap, int x, int y, Color_wc col) {
+    if (y >= 0 && y < pap.paperHeight && x >= 0 && x < pap.paperWidth) {
+        pap.paper[y][x].red = col.red;
+        pap.paper[y][x].green = col.green;
+        pap.paper[y][x].blue = col.blue;
+    }
 }
 
 /*

@@ -12,7 +12,7 @@
 #include "paper_wc.h"
 #include "button_wc.h"
 
-void setPoint(const Paper & pap, int x, int y);                 // 绘制paper中的一个像素
+void setPoint(const Paper & pap, int x, int y, Color_wc col);                 // 绘制paper中的一个像素
 void drawPaper(const Paper & pap, bool hasLines);               // 绘制paper（是否加线条）
 void drawString(const char * s, int poX, int poY);              // 绘制（在指定位置）字符
 void drawString(const char * s);
