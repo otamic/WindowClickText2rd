@@ -9,6 +9,7 @@
 
 void setPoint(const Paper & pap, int x, int y) {
 
+    glColor3b (pap.paper[y][x].red, pap.paper[y][x].green, pap.paper[y][x].blue);
     if (y >= 0 && y <= pap.paperHeight && x >= 0 && x <= pap.paperWidth)
         glRecti(pap.abX + x * pap.squreSize, pap.abY - (y + 1) * pap.squreSize, pap.abX + (x + 1) * pap.squreSize, pap.abY - y * pap.squreSize);
 
@@ -22,10 +23,9 @@ void drawPaper(const Paper & pap, bool hasLines) {
 
 
 //  glColor3f(0.0f, 0.0f, 0.0f);
-    glColor3b (0, 0, 0);
+//  glColor3b (0, 0, 0);
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
-            if (pap.paper[i][j])
                 setPoint(pap, j, i);
 
     if (hasLines) {
