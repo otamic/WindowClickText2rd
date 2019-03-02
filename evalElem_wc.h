@@ -30,5 +30,6 @@ const Color_wc GREEN_WC = { 0  , 127, 0   };
 const Color_wc BLUT_WC  = { 0  , 0  , 127 };
 
 enum Tag { line_wc = 0, rectangle_wc, round_wc, painting_wc, none_wc };
+enum PanelTag { blank_wc = 0, white_wc, red_wc, green_wc, blue_wc, back_wc };
 
 #endif //WINDOWCLICKTEXT2RD_EVALELEM_WC_H

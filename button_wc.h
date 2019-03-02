@@ -12,6 +12,7 @@
 #include "evalElem_wc.h"
 
 const int BUTTONWIDTH = 50, BUTTONHEIGHT = 20;
+const int PANELWIDTH = 100, PANELHEIGHT = 700;
 const char buttonS[10][10] = { { 'l', 'i', 'n', 'e', '\0' },
                                { 'r', 'e', 'c', 't', '\0' },
                                { 'r', 'o', 'n', 'd', '\0' }};
@@ -35,11 +36,21 @@ struct ButtonEnvr {                                             // 按钮集
 
 };
 
+struct Panel {
+
+    int panelWidth, panelHeight;
+    int poX, poY;
+
+};
+
 void ini_button(Button & but, Tag tag, int poX, int poY);       // 在指定位置创建一个按钮
 void ini_buttonEnvr(ButtonEnvr & butEnvr);
 Tag checkButton(const ButtonEnvr & butEnvr, int poX, int poY);  // 在poX和poY上是何种按钮
 void addButton(ButtonEnvr & butEnvr, Button & but);
 void changeButtonPos(Button &but, const Pos pos, bool tag);     // 改变坐标
+
+void ini_button (Panel & pal, int poX, int poY);
+PanelTag checkPanel (const Panel & pal, int poX, int poY);
 
 
 

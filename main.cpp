@@ -94,7 +94,7 @@ void init() {
     addButton(butEnvr, recButton);
     addButton(butEnvr, roundButton);
 
-    info = line_wc;
+    info = none_wc;
     firKey = true;
 
     colorAtTime = REC_WC;
