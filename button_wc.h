@@ -49,8 +49,9 @@ Tag checkButton(const ButtonEnvr & butEnvr, int poX, int poY);  // 在poX和poY�
 void addButton(ButtonEnvr & butEnvr, Button & but);
 void changeButtonPos(Button &but, const Pos pos, bool tag);     // 改变坐标
 
-void ini_button (Panel & pal, int poX, int poY);
+void ini_panel (Panel & pal, int poX, int poY);
 PanelTag checkPanel (const Panel & pal, int poX, int poY);
+Color_wc changeColor (PanelTag pTag);
 
 
 

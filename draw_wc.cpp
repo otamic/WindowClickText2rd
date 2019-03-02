@@ -131,20 +131,21 @@ void drawPanel (const Panel pal) {
     glRecti (pal.poX + 5, pal.poY - pal.panelHeight + 695, pal.poX + 35, pal.poY - pal.panelHeight + 665);
     glColor3b (WHITE_WC.red, WHITE_WC.green, WHITE_WC.blue);
     glRecti (pal.poX + 35, pal.poY - pal.panelHeight + 695, pal.poX + 65, pal.poY - pal.panelHeight + 665);
-    glColor3b (REC_WC.red, REC_WC.green, REC_WC.blue);
+    glColor3b (RED_WC.red, RED_WC.green, RED_WC.blue);
     glRecti (pal.poX + 65, pal.poY - pal.panelHeight + 695, pal.poX + 95, pal.poY - pal.panelHeight + 665);
     glColor3b (GREEN_WC.red, GREEN_WC.green, GREEN_WC.blue);
     glRecti (pal.poX + 5, pal.poY - pal.panelHeight + 665, pal.poX + 35, pal.poY - pal.panelHeight + 635);
     glColor3b (BLUE_WC.red, BLUE_WC.green, BLUE_WC.blue);
     glRecti (pal.poX + 35, pal.poY - pal.panelHeight + 665, pal.poX + 65, pal.poY - pal.panelHeight + 635);
 
-    glColor3b (BLANK_WC.red, BLANK_WC.green, BLANK_WC.blue);
+    glColor3b (WHITE_WC.red, WHITE_WC.green, WHITE_WC.blue);
     glBegin (GL_LINE_LOOP);
-    glVertex2i (5, 10);
-    glVertex2i (55, 10);
-    glVertex2i (55, 30);
-    glVertex2i (5, 30);
+    glVertex2i (5, 110);
+    glVertex2i (55, 110);
+    glVertex2i (55, 130);
+    glVertex2i (5, 130);
     glEnd ();
+    drawString ("back", 10, 115);
 
 }
 
@@ -155,16 +156,16 @@ void text_draw_info(Tag tag) {
     glRasterPos2i(10, 90);
     switch(tag) {
         case line_wc:
-            drawString("draw a line");
+            drawString("draw a line. ");
             break;
         case rectangle_wc:
-            drawString("draw a rectangle");
+            drawString("draw a rectangle. ");
             break;
         case round_wc:
-            drawString("draw a round");
+            drawString("draw a round. ");
             break;
         default:
-            drawString("draw nothing");
+            drawString("draw nothing. ");
             break;
     }
 
@@ -173,7 +174,7 @@ void text_draw_info(Tag tag) {
 void text_draw_info (PanelTag tag) {
 
     glColor3b (127, 127, 127);
-    glRasterPos2i(10, 90);
+    glRasterPos2i(10, 75);
     switch(tag) {
         case blank_wc:
             drawString("Blank");
@@ -200,7 +201,7 @@ void text_draw_keyInfo (bool isInput) {
 
 //  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
-    glRasterPos2i (10, 75);
+    glRasterPos2i (10, 60);
     drawString ("Are you sure to ");
     if (isInput)
         drawString ("Input");
