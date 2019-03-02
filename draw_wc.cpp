@@ -18,15 +18,16 @@ void setPoint(const Paper & pap, int x, int y, Color_wc col) {
 void drawPaper(const Paper & pap, bool hasLines) {
 
 //  glColor3f(1.0f, 1.0f, 1.0f);
+    /*
     glColor3b (127, 127, 127);
     glRecti(pap.abX, pap.abY - pap.squreSize * pap.paperHeight, pap.abX + pap.squreSize * pap.paperWidth, pap.abY);
-
+    */
 
 //  glColor3f(0.0f, 0.0f, 0.0f);
 //  glColor3b (0, 0, 0);
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
-            setPoint(pap, j, i, pap.paper[j][i]);
+            setPoint(pap, j, i, pap.paper[i][j]);
 
 
     if (hasLines) {

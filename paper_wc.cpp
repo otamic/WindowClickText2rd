@@ -16,7 +16,7 @@ void ini_paper(Paper & pap) {
 
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
-            pap.paper[i][j].red = pap.paper[i][j].green = pap.paper[i][j].blue = 0;
+            pap.paper[i][j].red = pap.paper[i][j].green = pap.paper[i][j].blue = 127;
 
 
 }

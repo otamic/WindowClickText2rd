@@ -34,7 +34,7 @@ Tag info;
 bool motion;
 bool firKey, isInput;
 
-Color_wc colorAtTime = BLANK_WC;
+Color_wc colorAtTime;
 
 int main(int argc, char ** argv) {
 
@@ -96,6 +96,8 @@ void init() {
 
     info = line_wc;
     firKey = true;
+
+    colorAtTime = REC_WC;
 
 }
 
