@@ -14,7 +14,7 @@
 struct Paper {
     int squreSize;                                              // 纸上一个像素宽
     int paperWidth, paperHeight;
-    int ** paper;                                               // 储存画面的二维矩阵
+    Color_wc ** paper;                                          // 储存画面的二维矩阵
     int abX, abY;                                               // 纸相对于窗口坐标
 };
 

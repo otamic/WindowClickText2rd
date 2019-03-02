@@ -9,14 +9,14 @@
 
 void ini_paper(Paper & pap) {
 
-    pap.paper = (int **) malloc(pap.paperHeight * sizeof(int *));
+    pap.paper = (Color_wc **) malloc(pap.paperHeight * sizeof(Color_wc *));
     for (int i = 0; i < pap.paperHeight; i++)
-        pap.paper[i] = (int *) malloc(pap.paperWidth * sizeof(int));
+        pap.paper[i] = (Color_wc *) malloc(pap.paperWidth * sizeof(Color_wc));
 
 
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
-            pap.paper[i][j] = 0;
+            pap.paper[i][j].red = pap.paper[i][j].green = pap.paper[i][j].blue = 0;
 
 
 }
@@ -56,7 +56,7 @@ void loadIn(Paper & pap) {
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
             for (int k = 0; k < 3; k++)
-                fscanf(fp, "%d", &pap.paper[i][j]);
+                fscanf(fp, "%hhu %hhu %hhu", &pap.paper[i][j].red, &pap.paper[i][j].green, &pap.paper[i][j].blue);
     fclose(fp);
 
 }
@@ -69,7 +69,7 @@ void loadOut(Paper & pap) {
     for (int i = 0; i < pap.paperHeight; i++) {
         for (int j = 0; j < pap.paperWidth; j++)
             for (int k = 0; k < 3; k++)
-                fprintf(fp, "%d ", pap.paper[i][j]);
+                fprintf(fp, "%hhu %hhu %hhu ", pap.paper[i][j].red, pap.paper[i][j].green, pap.paper[i][j].blue);
         fprintf(fp, "\n");
     }
     fclose(fp);
