@@ -12,9 +12,9 @@
 #include "paper_wc.h"
 #include "button_wc.h"
 
-void lineBresenham (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int));
-void rectanglePic (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int));
-static void circlePlotPoints (const Paper & pap, int xc, int yc, int x, int y, void (const Paper &, int x, int y));
-void circleMidpoint (const Paper & pap, const Button & but, void setPixel (const Paper &, int , int ));
+void lineBresenham (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col);
+void rectanglePic (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col);
+static void circlePlotPoints (const Paper & pap, int xc, int yc, int x, int y, void (const Paper &, int x, int y, Color_wc), Color_wc col);
+void circleMidpoint (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col);
 
 #endif //WINDOWCLICKTEXT2RD_PICELEM_WC_H
