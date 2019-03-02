@@ -7,8 +7,9 @@
 #include "draw_wc.h"
 #include "picElem_wc.h"
 
-void setPoint(const Paper & pap, int x, int y) {
+void setPoint(const Paper & pap, int x, int y, Color_wc col) {
 
+    glColor3b (col.red, col.green, col.blue);
     if (y >= 0 && y <= pap.paperHeight && x >= 0 && x <= pap.paperWidth)
         glRecti(pap.abX + x * pap.squreSize, pap.abY - (y + 1) * pap.squreSize, pap.abX + (x + 1) * pap.squreSize, pap.abY - y * pap.squreSize);
 
@@ -17,16 +18,17 @@ void setPoint(const Paper & pap, int x, int y) {
 void drawPaper(const Paper & pap, bool hasLines) {
 
 //  glColor3f(1.0f, 1.0f, 1.0f);
+    /*
     glColor3b (127, 127, 127);
     glRecti(pap.abX, pap.abY - pap.squreSize * pap.paperHeight, pap.abX + pap.squreSize * pap.paperWidth, pap.abY);
-
+    */
 
 //  glColor3f(0.0f, 0.0f, 0.0f);
-    glColor3b (0, 0, 0);
+//  glColor3b (0, 0, 0);
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
-            if (pap.paper[i][j])
-                setPoint(pap, j, i);
+            setPoint(pap, j, i, pap.paper[i][j]);
+
 
     if (hasLines) {
 //      glColor3f(0.2f, 0.2f, 0.2f);
@@ -130,13 +132,13 @@ void text_draw_info(Tag tag) {
     glRasterPos2i(10, 90);
     switch(tag) {
         case line_wc:
-            drawString("draw a line_wc");
+            drawString("draw a line");
             break;
         case rectangle_wc:
-            drawString("draw a rectangle_wc");
+            drawString("draw a rectangle");
             break;
         case round_wc:
-            drawString("draw a round_wc");
+            drawString("draw a round");
             break;
         default:
             drawString("draw nothing");
@@ -260,26 +262,27 @@ void text_lineBres (Paper & pap, const Button & but) {
  */
 
 
-void text_lineBres (Paper & pap, const Button & but) {
+void text_lineBres (Paper & pap, const Button & but, Color_wc col) {
 
-    glColor3f(0.0f, 0.0f, 0.0f);
-    lineBresenham(pap, but, setPoint);
+//  glColor3f(0.0f, 0.0f, 0.0f);
+//  glColor3b (col.red, col.green, col.blue);
+    lineBresenham(pap, but, setPoint, col);
 
 }
 
-void text_roudBres (Paper & pap, const Button & but) {
+void text_roudBres (Paper & pap, const Button & but, Color_wc col) {
 
 //  glColor3f(0.0f, 0.0f, 0.0f);
-    glColor3b (0, 0, 0);
-    circleMidpoint(pap, but, setPoint);
+//  glColor3b (col.red, col.green, col.blue);
+    circleMidpoint(pap, but, setPoint, col);
 
 }
 
-void text_rect (Paper & pap, const Button & but) {
+void text_rect (Paper & pap, const Button & but, Color_wc col) {
 
 //  glColor3f(0.0f, 0.0f, 0.0f);
-    glColor3b (0, 0, 0);
-    rectanglePic(pap, but, setPoint);
+//  glColor3b (col.red, col.green, col.blue);
+    rectanglePic(pap, but, setPoint, col);
 
 }
 

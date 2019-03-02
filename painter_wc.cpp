@@ -6,9 +6,12 @@
 
 #include <cstring>
 
-void setPixel (const Paper & pap, int x, int y) {
-    if (y >= 0 && y < pap.paperHeight && x >= 0 && x < pap.paperWidth)
-        pap.paper[y][x] = 1;
+void setPixel (const Paper & pap, int x, int y, Color_wc col) {
+    if (y >= 0 && y < pap.paperHeight && x >= 0 && x < pap.paperWidth) {
+        pap.paper[y][x].red = col.red;
+        pap.paper[y][x].green = col.green;
+        pap.paper[y][x].blue = col.blue;
+    }
 }
 
 /*
@@ -35,14 +38,14 @@ void lineDDA (Paper & pap, int xs, int ys, int xe, int ye) {
 }
  */
 
-void lineBres (Paper & pap, const Button & but) {
-    lineBresenham(pap, but, setPixel);
+void lineBres (Paper & pap, const Button & but, Color_wc col) {
+    lineBresenham(pap, but, setPixel, col);
 }
 
-void roudBres (Paper & pap, const Button & but) {
-    circleMidpoint(pap, but, setPixel);
+void roudBres (Paper & pap, const Button & but, Color_wc col) {
+    circleMidpoint(pap, but, setPixel, col);
 }
 
-void rect (Paper & pap, const Button & but) {
-    rectanglePic (pap, but, setPixel);
+void rect (Paper & pap, const Button & but, Color_wc col) {
+    rectanglePic (pap, but, setPixel, col);
 }
