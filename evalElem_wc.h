@@ -23,6 +23,9 @@ struct Color_wc {
 
 };
 
+const Color_wc BLANK_WC = { 0  , 0  , 0   };
+const Color_wc WHITE_WC = { 127, 127, 127 };
+
 enum Tag { line_wc = 0, rectangle_wc, round_wc, painting_wc, none_wc };
 
 #endif //WINDOWCLICKTEXT2RD_EVALELEM_WC_H

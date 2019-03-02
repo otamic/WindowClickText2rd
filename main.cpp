@@ -34,6 +34,8 @@ Tag info;
 bool motion;
 bool firKey, isInput;
 
+Color_wc colorAtTime = BLANK_WC;
+
 int main(int argc, char ** argv) {
 
     glutInit(&argc, argv);
@@ -123,13 +125,13 @@ void Display() {
 //      text_lineBres(pap, lineButton);
         switch (info) {
             case line_wc:
-                text_lineBres(pap, lineButton);
+                text_lineBres(pap, lineButton, colorAtTime);
                 break;
             case rectangle_wc:
-                text_rect (pap, recButton);
+                text_rect (pap, recButton, colorAtTime);
                 break;
             case round_wc:
-                text_roudBres(pap, roundButton);
+                text_roudBres(pap, roundButton, colorAtTime);
                 break;
             default:
                 break;
@@ -180,15 +182,15 @@ void Mouse(int button, int state, int x, int y) {
                 case line_wc:
                     changeButtonPos(lineButton, end, false);
 //                  lineDDA(pap, lineButton.xs, lineButton.ys, lineButton.xe, lineButton.ye);
-                    lineBres(pap, lineButton);
+                    lineBres(pap, lineButton, colorAtTime);
                     break;
                 case rectangle_wc:
                     changeButtonPos (recButton, end, false);
-                    rect (pap, recButton);
+                    rect (pap, recButton, colorAtTime);
                     break;
                 case round_wc:
                     changeButtonPos (roundButton, end, false);
-                    roudBres (pap, roundButton);
+                    roudBres (pap, roundButton, colorAtTime);
                     break;
                 default:
                     break;
