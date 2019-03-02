@@ -125,6 +125,29 @@ void drawButtons(const ButtonEnvr & butEnvr) {
 
 }
 
+void drawPanel (const Panel pal) {
+
+    glColor3b (BLANK_WC.red, BLANK_WC.green, BLANK_WC.blue);
+    glRecti (pal.poX + 5, pal.poY - pal.panelHeight + 695, pal.poX + 35, pal.poY - pal.panelHeight + 665);
+    glColor3b (WHITE_WC.red, WHITE_WC.green, WHITE_WC.blue);
+    glRecti (pal.poX + 35, pal.poY - pal.panelHeight + 695, pal.poX + 65, pal.poY - pal.panelHeight + 665);
+    glColor3b (REC_WC.red, REC_WC.green, REC_WC.blue);
+    glRecti (pal.poX + 65, pal.poY - pal.panelHeight + 695, pal.poX + 95, pal.poY - pal.panelHeight + 665);
+    glColor3b (GREEN_WC.red, GREEN_WC.green, GREEN_WC.blue);
+    glRecti (pal.poX + 5, pal.poY - pal.panelHeight + 665, pal.poX + 35, pal.poY - pal.panelHeight + 635);
+    glColor3b (BLUE_WC.red, BLUE_WC.green, BLUE_WC.blue);
+    glRecti (pal.poX + 35, pal.poY - pal.panelHeight + 665, pal.poX + 65, pal.poY - pal.panelHeight + 635);
+
+    glColor3b (BLANK_WC.red, BLANK_WC.green, BLANK_WC.blue);
+    glBegin (GL_LINE_LOOP);
+    glVertex2i (5, 10);
+    glVertex2i (55, 10);
+    glVertex2i (55, 30);
+    glVertex2i (5, 30);
+    glEnd ();
+
+}
+
 void text_draw_info(Tag tag) {
 
 //  glColor3f(1.0f, 1.0f, 1.0f);
@@ -145,6 +168,32 @@ void text_draw_info(Tag tag) {
             break;
     }
 
+}
+
+void text_draw_info (PanelTag tag) {
+
+    glColor3b (127, 127, 127);
+    glRasterPos2i(10, 90);
+    switch(tag) {
+        case blank_wc:
+            drawString("Blank");
+            break;
+        case white_wc:
+            drawString("White");
+            break;
+        case red_wc:
+            drawString("Red");
+            break;
+        case green_wc:
+            drawString ("Green");
+            break;
+        case blue_wc:
+            drawString ("Blue");
+            break;
+        default:
+            drawString("draw nothing");
+            break;
+    }
 }
 
 void text_draw_keyInfo (bool isInput) {
