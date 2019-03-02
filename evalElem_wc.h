@@ -9,8 +9,18 @@
  * 一些全局用的自定义参数、变量
  */
 
+#include <OpenGL/gltypes.h>
+
 struct Pos {
     int x, y;
+};
+
+struct Color_wc {
+
+    GLbyte red;
+    GLbyte green;
+    GLbyte blue;
+
 };
 
 enum Tag { line_wc = 0, rectangle_wc, round_wc, painting_wc, none_wc };
