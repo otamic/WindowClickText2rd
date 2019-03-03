@@ -14,7 +14,9 @@ const int PIXEL_MODE_4 = 4;     // 450 * 300
 const int PIXEL_MODE_5 = 5;     // 900 * 600
 
 int pixel_mode = PIXEL_MODE_2;  // 像素选择
-bool hasLines = false;          // 有无格子线
+bool hasLines = true;          // 有无格子线
+
+int lineWidth;
 
 /*
  * OpenGL固定套路
@@ -104,6 +106,7 @@ void init() {
     colorAtTime = BLANK_WC;
     pTag = blank_wc;
 
+    lineWidth = 4;
 }
 
 void Reshape(GLsizei newWidth, GLsizei newHeight) {
@@ -140,7 +143,8 @@ void Display() {
 //      text_lineBres(pap, lineButton);
         switch (info) {
             case line_wc:
-                text_lineBres(pap, lineButton, colorAtTime);
+//              text_lineBres(pap, lineButton, colorAtTime);
+                text_lineBres_2 (pap, lineButton, colorAtTime, lineWidth);
                 break;
             case rectangle_wc:
                 text_rect (pap, recButton, colorAtTime);
@@ -209,7 +213,8 @@ void Mouse(int button, int state, int x, int y) {
                 case line_wc:
                     changeButtonPos(lineButton, end, false);
 //                  lineDDA(pap, lineButton.xs, lineButton.ys, lineButton.xe, lineButton.ye);
-                    lineBres(pap, lineButton, colorAtTime);
+//                  lineBres(pap, lineButton, colorAtTime);
+                    lineBres_2 (pap, lineButton, colorAtTime, lineWidth);
                     break;
                 case rectangle_wc:
                     changeButtonPos (recButton, end, false);

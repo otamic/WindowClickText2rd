@@ -336,3 +336,22 @@ void text_rect (Paper & pap, const Button & but, Color_wc col) {
 
 }
 
+void setPoint_2 (const Paper & pap, int x, int y, int width, bool isColumn, Color_wc col) {
+
+    if (isColumn) {
+        x = x - width / 2;
+        for (int i = 0; i <= width - 1; i++)
+            setPoint(pap, x + i, y, col);
+    }
+    else {
+        y = y - width / 2;
+        for (int i = 0; i <= width - 1; i++)
+            setPoint(pap, x, y + i, col);
+    }
+
+}
+
+void text_lineBres_2 (Paper & pap, const Button & but, Color_wc col, int width) {
+    lineBresenham_2(pap, but, setPoint_2, col, width);
+}
+

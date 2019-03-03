@@ -49,3 +49,22 @@ void roudBres (Paper & pap, const Button & but, Color_wc col) {
 void rect (Paper & pap, const Button & but, Color_wc col) {
     rectanglePic (pap, but, setPixel, col);
 }
+
+void setPixel_2 (const Paper & pap, int x, int y, int width, bool isColumn, Color_wc col) {
+
+    if (isColumn) {
+        x = x - width / 2;
+        for (int i = 0; i <= width - 1; i++)
+            setPixel(pap, x + i, y, col);
+    }
+    else {
+        y = y - width / 2;
+        for (int i = 0; i <= width - 1; i++)
+            setPixel(pap, x, y + i, col);
+    }
+
+}
+
+void lineBres_2 (Paper & pap, const Button & but, Color_wc col, int width) {
+    lineBresenham_2 (pap, but, setPixel_2, col, width);
+}

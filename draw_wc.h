@@ -31,4 +31,7 @@ void text_lineBres (Paper & pap, const Button & but, Color_wc col);           //
 void text_roudBres (Paper & pap, const Button & but, Color_wc col);           // （缓存的）画圆
 void text_rect (Paper & pap, const Button & but, Color_wc col);               // （缓存的）画矩形
 
+void setPoint_2 (const Paper & pap, int x, int y, int width, bool isColumn, Color_wc col);
+void text_lineBres_2 (Paper & pap, const Button & but, Color_wc col, int width);
+
 #endif //WINDOWCLICKTEXT2RD_PAINT_WC_H

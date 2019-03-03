@@ -17,4 +17,6 @@ void rectanglePic (const Paper & pap, const Button & but, void setPixel (const P
 static void circlePlotPoints (const Paper & pap, int xc, int yc, int x, int y, void (const Paper &, int x, int y, Color_wc), Color_wc col);
 void circleMidpoint (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col);
 
+void lineBresenham_2 (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, int, bool, Color_wc), Color_wc col, int width);
+
 #endif //WINDOWCLICKTEXT2RD_PICELEM_WC_H

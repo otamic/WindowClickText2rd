@@ -105,3 +105,57 @@ void circleMidpoint (const Paper & pap, const Button & but, void setPixel (const
     }
 
 }
+
+void lineBresenham_2 (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, int, bool, Color_wc), Color_wc col, int width) {
+
+    int xs = but.xs, ys = but.ys, xe = but.xe, ye = but.ye;
+
+    int dx = wc_abs(xe - xs), dy = wc_abs(ye - ys);
+
+    bool tag = true;
+    bool column = dx < dy;
+
+    if (dx < dy) {
+        wc_swap(dx, dy);
+        wc_swap(xs, ys);
+        wc_swap(xe, ye);
+        tag = false;
+    }
+
+    int p = 2 * dy - dx;
+    int twoDy = 2 * dy, twoDyMinusDx = 2 * (dy - dx);
+    int x, y, add = 1;
+
+    if (xs > xe) {
+        x = xe;
+        y = ye;
+        xe = xs;
+        if (y > ys)
+            add = -1;
+    }
+    else {
+        x = xs;
+        y = ys;
+        if (y > ye)
+            add = -1;
+    }
+    if (tag)
+        setPixel(pap, x, y, width, column, col);
+    else
+        setPixel(pap, y, x, width, column, col);
+
+    while(x < xe) {
+        x++;
+        if (p < 0)
+            p += twoDy;
+        else {
+            y += add;
+            p += twoDyMinusDx;
+        }
+        if (tag)
+            setPixel(pap, x, y, width, column, col);
+        else
+            setPixel(pap, y, x, width, column, col);
+    }
+
+}
