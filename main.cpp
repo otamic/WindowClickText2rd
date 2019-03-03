@@ -9,9 +9,9 @@ GLsizei Width = 1000, Height = 700;
  */
 const int PIXEL_MODE_1 = 1;     // 90  * 60
 const int PIXEL_MODE_2 = 2;     // 180 * 120
-const int PIXEL_MODE_3 = 3;     // 200 * 300
-const int PIXEL_MODE_4 = 4;     // 300 * 450
-const int PIXEL_MODE_5 = 5;     // 600 * 900
+const int PIXEL_MODE_3 = 3;     // 300 * 200
+const int PIXEL_MODE_4 = 4;     // 450 * 300
+const int PIXEL_MODE_5 = 5;     // 900 * 600
 
 int pixel_mode = PIXEL_MODE_2;  // 像素选择
 bool hasLines = false;          // 有无格子线
