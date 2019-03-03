@@ -45,3 +45,51 @@ void changeButtonPos(Button &but, const Pos pos, bool tag) {
     }
 
 }
+
+void ini_panel (Panel & pal, int poX, int poY) {
+
+    pal.panelHeight = PANELHEIGHT;
+    pal.panelWidth = PANELWIDTH;
+    pal.poX = poX;
+    pal.poY = poY;
+
+}
+
+PanelTag checkPanel (const Panel & pal, int poX, int poY) {
+
+    int x = poX - pal.poX, y = poY - pal.poY + pal.panelHeight;
+
+    if (poX > 5 && poX < 35 && poY > 5 && poY < 35)
+        return blank_wc;
+    else if (poX > 5 && poX < 35 && poY > 35 && poY < 65)
+        return green_wc;
+    else if (poX > 35 && poX < 65 && poY > 5 && poY < 35)
+        return white_wc;
+    else if (poX > 35 && poX < 65 && poY > 35 && poY < 65)
+        return blue_wc;
+    else if (poX > 65 && poX < 95 && poY > 5 && poY < 35)
+        return red_wc;
+    else if (poX > 5 && poX < 55 && poY > 570 && poY < 590)         // warning! Can't use in the other place!
+        return back_wc;
+    else
+        return nothing_wc;
+
+}
+
+Color_wc changeColor (PanelTag pTag) {
+
+    switch (pTag) {
+        case blank_wc:
+            return BLANK_WC;
+        case white_wc:
+            return WHITE_WC;
+        case red_wc:
+            return RED_WC;
+        case green_wc:
+            return GREEN_WC;
+        case blue_wc:
+            return BLUE_WC;
+        default:
+            break;
+    }
+}

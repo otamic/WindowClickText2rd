@@ -9,9 +9,9 @@ GLsizei Width = 1000, Height = 700;
  */
 const int PIXEL_MODE_1 = 1;     // 90  * 60
 const int PIXEL_MODE_2 = 2;     // 180 * 120
-const int PIXEL_MODE_3 = 3;     // 200 * 300
-const int PIXEL_MODE_4 = 4;     // 300 * 450
-const int PIXEL_MODE_5 = 5;     // 600 * 900
+const int PIXEL_MODE_3 = 3;     // 300 * 200
+const int PIXEL_MODE_4 = 4;     // 450 * 300
+const int PIXEL_MODE_5 = 5;     // 900 * 600
 
 int pixel_mode = PIXEL_MODE_2;  // 像素选择
 bool hasLines = false;          // 有无格子线
@@ -35,6 +35,8 @@ bool motion;
 bool firKey, isInput;
 
 Color_wc colorAtTime;
+PanelTag pTag;
+Panel pal;
 
 int main(int argc, char ** argv) {
 
@@ -56,7 +58,7 @@ int main(int argc, char ** argv) {
 
 void init() {
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     switch (pixel_mode) {
         case PIXEL_MODE_1:
@@ -94,10 +96,13 @@ void init() {
     addButton(butEnvr, recButton);
     addButton(butEnvr, roundButton);
 
-    info = line_wc;
+    ini_panel (pal, 0, Height);
+
+    info = none_wc;
     firKey = true;
 
-    colorAtTime = REC_WC;
+    colorAtTime = BLANK_WC;
+    pTag = blank_wc;
 
 }
 
@@ -117,11 +122,19 @@ void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    drawButtons(butEnvr);
+    if (info == none_wc)
+        drawButtons(butEnvr);
+    else
+        drawPanel (pal);
+
     drawPaper(pap, hasLines);
 
     text_draw_other();
+
     text_draw_info(info);
+    if (info != none_wc)
+        text_draw_info(pTag);
+
     if (motion)
 //      text_lineDDA(pap, lineButton);
 //      text_lineBres(pap, lineButton);
@@ -150,8 +163,20 @@ void Mouse(int button, int state, int x, int y) {
 
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-        if (x > 0 && x < 100 && y > 0 && y < 600)
+        if (x > 0 && x < 100 && y > 0 && y < 600) {
+            if (info == none_wc)
             info = checkButton(butEnvr, x, Height - y);
+            else {
+                pTag = checkPanel(pal, x, y);
+                if (pTag != nothing_wc && pTag != back_wc)
+                    colorAtTime = changeColor(pTag);
+                else if (pTag == back_wc) {
+                    info = none_wc;
+                    pTag = blank_wc;
+                    colorAtTime = BLANK_WC;
+                }
+            }
+        }
 
         if (x > 100 && x < 1000 && y > 0 && y < 600) {
             Pos start = getPoint(pap, x, y, Height);

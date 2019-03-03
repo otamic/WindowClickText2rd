@@ -20,8 +20,10 @@ void drawNum(int num, int poX, int poY);                        // 绘制（在�
 void drawNum(int num);
 static void drawButton(const Button & but);
 void drawButtons(const ButtonEnvr & butEnvr);                   // 绘制所有按钮
+void drawPanel (const Panel pal);
 
 void text_draw_info(Tag tag);                                   // 绘制功能提示
+void text_draw_info (PanelTag tag);
 void text_draw_keyInfo (bool isDraw);                           // 绘制按键提示
 void text_draw_other();                                         // 绘制边框
 //void text_lineDDA(const Paper & pap, const Button & but);
