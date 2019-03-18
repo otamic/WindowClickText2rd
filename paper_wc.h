@@ -15,7 +15,7 @@ struct Paper {
     int squreSize;                                              // 纸上一个像素宽
     int paperWidth, paperHeight;
     Color_wc ** paper;                                          // 储存画面的二维矩阵
-    int abX, abY;                                               // 纸相对于窗口坐标
+    int abX, abY;                                               // The top left corner relative to the window (is descried as Cartesian coordinates)
 };
 
 void setPaperSize (Paper & pap, int newSize);                   // 设置纸在窗口上的大小
@@ -26,5 +26,7 @@ void loadOut(Paper & pap);                                      // 导出矩阵
 void ini_paper(Paper & pap);
 void destroy_paper (Paper & pap);
 Pos getPoint(Paper & pap, int poX, int poY, int Height);        // 窗口的位置对应纸的像素
+
+void ini_paper (Paper & pap, int poX, int poY);                 // Create a new Paper in a window
 
 #endif //WINDOWCLICKTEXT2RD_PAPER_WC_H

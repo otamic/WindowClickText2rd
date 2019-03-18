@@ -87,3 +87,19 @@ Pos getPoint (Paper & pap, int poX, int poY, int Height) {
     return t;
 
 }
+
+void ini_paper (Paper & pap, int poX, int poY) {
+
+    pap.paper = (Color_wc **) malloc(pap.paperHeight * sizeof(Color_wc *));
+    for (int i = 0; i < pap.paperHeight; i++)
+        pap.paper[i] = (Color_wc *) malloc(pap.paperWidth * sizeof(Color_wc));
+
+
+    for (int i = 0; i < pap.paperHeight; i++)
+        for (int j = 0; j < pap.paperWidth; j++)
+            pap.paper[i][j].red = pap.paper[i][j].green = pap.paper[i][j].blue = 127;
+
+    pap.abX = poX;
+    pap.abY = poY;
+
+}

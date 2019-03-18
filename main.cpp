@@ -5,7 +5,7 @@
 GLsizei Width = 1000, Height = 700;
 
 /*
- * 模式选择
+ * Model selected
  */
 const int PIXEL_MODE_1 = 1;     // 90  * 60
 const int PIXEL_MODE_2 = 2;     // 180 * 120
@@ -17,7 +17,7 @@ int pixel_mode = PIXEL_MODE_2;  // 像素选择
 bool hasLines = false;          // 有无格子线
 
 /*
- * OpenGL固定套路
+ * OpenGL model
  */
 void init();
 void Display();
@@ -26,6 +26,9 @@ void Mouse(int button, int state, int x, int y);
 void myMotion(int x, int y);
 void Keyboard(unsigned char key, int x, int y);
 
+/*
+ * Environmental variable
+ */
 Paper pap;
 ButtonEnvr butEnvr;
 Button lineButton, recButton, roundButton;
@@ -57,9 +60,14 @@ int main(int argc, char ** argv) {
 }
 
 void init() {
-
+    /*
+     * OpenGl needed
+     */
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
+    /*
+     * Create a Paper
+     */
     switch (pixel_mode) {
         case PIXEL_MODE_1:
             setPaperSize(pap, 10);
@@ -84,10 +92,13 @@ void init() {
         default:
             break;
     }
+//    locatePaper(pap, 100, Height);
+//    ini_paper(pap);
+    ini_paper(pap, 100, Height);
 
-    locatePaper(pap, 100, Height);
-    ini_paper(pap);
-
+    /*
+     * Create Buttons
+     */
     ini_buttonEnvr(butEnvr);
     ini_button(lineButton, line_wc, 10, 600);
     ini_button(recButton, rectangle_wc, 10, 550);
@@ -96,11 +107,16 @@ void init() {
     addButton(butEnvr, recButton);
     addButton(butEnvr, roundButton);
 
+    /*
+     * Create a Panel
+     */
     ini_panel (pal, 0, Height);
 
+    /*
+     * Initialize some environmental variables
+     */
     info = none_wc;
     firKey = true;
-
     colorAtTime = BLANK_WC;
     pTag = blank_wc;
 
@@ -122,22 +138,42 @@ void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT);
 
+    /*
+     * Show the function or the panel (function selected)
+     * Need for changes
+     */
     if (info == none_wc)
         drawButtons(butEnvr);
     else
         drawPanel (pal);
 
+    /*
+     * Draw the Paper of course
+     * Draw means using the OpenGL function, while paint means changing the Paper's pixel only
+     */
     drawPaper(pap, hasLines);
 
+    /*
+     * Draw the frame
+     */
     text_draw_other();
 
+    /*
+     * Draw some information in words at the button of the window
+     * First line: function selected
+     * Second line: color at the time
+     * Third line: feedback from the keyboard
+     */
     text_draw_info(info);
     if (info != none_wc)
         text_draw_info(pTag);
+    if (!firKey)
+        text_draw_keyInfo(isInput);
 
+    /*
+     * Draw the Pic element which has not been recorded in the Paper
+     */
     if (motion)
-//      text_lineDDA(pap, lineButton);
-//      text_lineBres(pap, lineButton);
         switch (info) {
             case line_wc:
                 text_lineBres(pap, lineButton, colorAtTime);
@@ -152,17 +188,19 @@ void Display() {
                 break;
         }
 
-    if (!firKey)
-        text_draw_keyInfo(isInput);
-
     glutSwapBuffers();
 
 }
 
 void Mouse(int button, int state, int x, int y) {
 
-
+    /*
+     * Need for changes!
+     */
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        /*
+         * Has clicked in the left (or Panel) area
+         */
         if (x > 0 && x < 100 && y > 0 && y < 600) {
             if (info == none_wc)
             info = checkButton(butEnvr, x, Height - y);
@@ -178,6 +216,9 @@ void Mouse(int button, int state, int x, int y) {
             }
         }
 
+        /*
+         * has clicked in the Paper
+         */
         if (x > 100 && x < 1000 && y > 0 && y < 600) {
             Pos start = getPoint(pap, x, y, Height);
             switch (info) {
@@ -208,7 +249,6 @@ void Mouse(int button, int state, int x, int y) {
             switch (info) {
                 case line_wc:
                     changeButtonPos(lineButton, end, false);
-//                  lineDDA(pap, lineButton.xs, lineButton.ys, lineButton.xe, lineButton.ye);
                     lineBres(pap, lineButton, colorAtTime);
                     break;
                 case rectangle_wc:

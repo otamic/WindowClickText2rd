@@ -22,7 +22,7 @@ struct Button {
 
     Tag tag;
     int buttonWidth, buttonHeight;
-    int poX, poY;
+    int poX, poY;                                               // The top left corner relative to the window
 
     int xs, ys;                                                 // 携带两组（start，end）坐标，用于绘图
     int xe, ye;
