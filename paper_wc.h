@@ -25,7 +25,7 @@ void loadIn(Paper & pap);                                       // 导入存在P
 void loadOut(Paper & pap);                                      // 导出矩阵
 void ini_paper(Paper & pap);
 void destroy_paper (Paper & pap);
-Pos getPoint(Paper & pap, int poX, int poY, int Height);        // 窗口的位置对应纸的像素
+Pos getPoint(Paper & pap, int poX, int poY);        // 窗口的位置对应纸的像素
 
 void ini_paper (Paper & pap, int poX, int poY);                 // Create a new Paper in a window
 

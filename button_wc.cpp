@@ -57,19 +57,19 @@ void ini_panel (Panel & pal, int poX, int poY) {
 
 PanelTag checkPanel (const Panel & pal, int poX, int poY) {
 
-    int x = poX - pal.poX, y = poY - pal.poY + pal.panelHeight;
+    int x = poX - pal.poX, y = pal.poY - poY;
 
-    if (poX > 5 && poX < 35 && poY > 5 && poY < 35)
+    if (x > 5 && x < 35 && y > 5 && y < 35)
         return blank_wc;
-    else if (poX > 5 && poX < 35 && poY > 35 && poY < 65)
+    else if (x > 5 && x < 35 && y > 35 && y < 65)
         return green_wc;
-    else if (poX > 35 && poX < 65 && poY > 5 && poY < 35)
+    else if (x > 35 && y < 65 && y > 5 && y < 35)
         return white_wc;
-    else if (poX > 35 && poX < 65 && poY > 35 && poY < 65)
+    else if (x > 35 && x < 65 && y > 35 && y < 65)
         return blue_wc;
-    else if (poX > 65 && poX < 95 && poY > 5 && poY < 35)
+    else if (x > 65 && x < 95 && y > 5 && y < 35)
         return red_wc;
-    else if (poX > 5 && poX < 55 && poY > 570 && poY < 590)         // warning! Can't use in the other place!
+    else if (x > 5 && x < 55 && y > 570 && y < 590)
         return back_wc;
     else
         return nothing_wc;

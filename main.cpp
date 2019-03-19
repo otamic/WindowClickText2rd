@@ -14,7 +14,7 @@ const int PIXEL_MODE_4 = 4;     // 450 * 300
 const int PIXEL_MODE_5 = 5;     // 900 * 600
 
 int pixel_mode = PIXEL_MODE_2;  // 像素选择
-bool hasLines = false;          // 有无格子线
+bool hasLines = true;          // 有无格子线
 
 /*
  * OpenGL model
@@ -67,6 +67,7 @@ void init() {
 
     /*
      * Create a Paper
+     * ? write in Paper
      */
     switch (pixel_mode) {
         case PIXEL_MODE_1:
@@ -92,8 +93,6 @@ void init() {
         default:
             break;
     }
-//    locatePaper(pap, 100, Height);
-//    ini_paper(pap);
     ini_paper(pap, 100, Height);
 
     /*
@@ -194,6 +193,8 @@ void Display() {
 
 void Mouse(int button, int state, int x, int y) {
 
+    int xx = x, yy = Height - y;                                         // left up as the zero point
+
     /*
      * Need for changes!
      */
@@ -203,9 +204,9 @@ void Mouse(int button, int state, int x, int y) {
          */
         if (x > 0 && x < 100 && y > 0 && y < 600) {
             if (info == none_wc)
-            info = checkButton(butEnvr, x, Height - y);
+            info = checkButton(butEnvr, xx, yy);
             else {
-                pTag = checkPanel(pal, x, y);
+                pTag = checkPanel(pal, xx, yy);
                 if (pTag != nothing_wc && pTag != back_wc)
                     colorAtTime = changeColor(pTag);
                 else if (pTag == back_wc) {
@@ -220,7 +221,7 @@ void Mouse(int button, int state, int x, int y) {
          * has clicked in the Paper
          */
         if (x > 100 && x < 1000 && y > 0 && y < 600) {
-            Pos start = getPoint(pap, x, y, Height);
+            Pos start = getPoint(pap, xx, yy);
             switch (info) {
                 case line_wc:
                     changeButtonPos(lineButton, start, true);
@@ -245,7 +246,7 @@ void Mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
         if (x > 100 && x < 1000 && y > 0 && y < 600) {
-            Pos end = getPoint(pap, x, y, Height);
+            Pos end = getPoint(pap, xx, yy);
             switch (info) {
                 case line_wc:
                     changeButtonPos(lineButton, end, false);
@@ -274,8 +275,10 @@ void Mouse(int button, int state, int x, int y) {
 
 void myMotion(int x, int y) {
 
+    int xx = x, yy = Height - y;
+
     if (x > 100 && x < 1000 && y > 0 && y < 600) {
-        Pos end = getPoint(pap, x, y, Height);
+        Pos end = getPoint(pap, xx, yy);
         switch (info) {
             case line_wc:
                 changeButtonPos(lineButton, end, false);
