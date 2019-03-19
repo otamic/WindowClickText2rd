@@ -5,9 +5,10 @@
 #ifndef WINDOWCLICKTEXT2RD_BUTTON_WC_H
 #define WINDOWCLICKTEXT2RD_BUTTON_WC_H
 
-/*
- * 按钮组件
- */
+/************************************
+ * Button
+ * Panel
+ ************************************/
 
 #include "evalElem_wc.h"
 
@@ -18,21 +19,13 @@ const char buttonS[10][10] = { { 'l', 'i', 'n', 'e', '\0' },
                                { 'r', 'o', 'n', 'd', '\0' }};
 const int MAX_BUTTON_NUM = 100;
 
+/************************************
+ * Elemental type
+ ************************************/
 struct Button {
 
-    Tag tag;
     int buttonWidth, buttonHeight;
     int poX, poY;                                               // The top left corner relative to the window
-
-    int xs, ys;                                                 // 携带两组（start，end）坐标，用于绘图
-    int xe, ye;
-
-};
-
-struct ButtonEnvr {                                             // 按钮集
-
-    Button buttons[MAX_BUTTON_NUM];
-    int buttonNum;
 
 };
 
@@ -43,15 +36,72 @@ struct Panel {
 
 };
 
-void ini_button(Button & but, Tag tag, int poX, int poY);       // 在指定位置创建一个按钮
-void ini_buttonEnvr(ButtonEnvr & butEnvr);
-Tag checkButton(const ButtonEnvr & butEnvr, int poX, int poY);  // 在poX和poY上是何种按钮
-void addButton(ButtonEnvr & butEnvr, Button & but);
-void changeButtonPos(Button &but, const Pos pos, bool tag);     // 改变坐标
+struct ButtonEnvr {                                             // Button set
 
+    Button buttons[MAX_BUTTON_NUM];
+    int buttonNum;
+
+};
+
+/************************************
+ * Expand type
+ ************************************/
+struct MFButton {
+
+    Button buttonAttribute;
+
+    Tag tag;
+    int xs, ys;
+    int xe, ye;
+};
+
+struct MFButtonSet {
+
+    MFButton mfButtons[MAX_BUTTON_NUM];
+    int buttonNum;
+
+};
+
+
+/*************************************
+ * Elemental function
+ *************************************/
+
+/*
+ * Button function
+ */
+void ini_button (Button & but, int poX, int poY);
+
+/*
+ * Button Set function
+ */
+void ini_buttonEnvr(ButtonEnvr & butEnvr);
+void addButton(ButtonEnvr & butEnvr, Button & but);
+//(Tag) checkButton(const ButtonEnvr & butEnvr, int poX, int poY);
+
+/*
+ * Panel function
+ */
 void ini_panel (Panel & pal, int poX, int poY);
-PanelTag checkPanel (const Panel & pal, int poX, int poY);
-Color_wc changeColor (PanelTag pTag);
+PanelTag checkPanel (const Panel & pal, int poX, int poY);          // need for moving
+Color_wc changeColor (PanelTag pTag);                               // need for moving
+
+/************************************
+ * Expand function
+ ************************************/
+
+/*
+ * MFButton function
+ */
+void ini_MFButton(MFButton & but, Tag tag, int poX, int poY);
+void changeMFButtonPos(MFButton & but, const Pos pos, bool tag);
+
+/*
+ * MFButton set function
+ */
+void ini_MFButtonSet (MFButtonSet & butSet);
+void addMFButton (MFButtonSet & butSet, MFButton & but);
+Tag checkMFButton (const MFButtonSet & butSet, int poX, int poY);   // need for moving
 
 
 

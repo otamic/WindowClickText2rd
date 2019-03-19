@@ -5,10 +5,9 @@
 #ifndef WINDOWCLICKTEXT2RD_PAPER_WC_H
 #define WINDOWCLICKTEXT2RD_PAPER_WC_H
 
-/*
- * 纸组件
- */
-
+/************************************
+ * Paper component
+ ************************************/
 #include "evalElem_wc.h"
 
 struct Paper {

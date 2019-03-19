@@ -4,13 +4,12 @@
 
 #include "button_wc.h"
 
-void ini_button(Button & but, Tag tag, int poX, int poY) {
+void ini_button (Button & but, int poX, int poY) {
 
-    but.tag = tag;
-    but.buttonHeight = BUTTONHEIGHT;
-    but.buttonWidth = BUTTONWIDTH;
     but.poX = poX;
     but.poY = poY;
+    but.buttonHeight = BUTTONHEIGHT;
+    but.buttonWidth = BUTTONWIDTH;
 
 }
 
@@ -18,32 +17,8 @@ void ini_buttonEnvr(ButtonEnvr & butEnvr) {
     butEnvr.buttonNum = 0;
 }
 
-Tag checkButton(const ButtonEnvr & butEnvr, int poX, int poY) {
-
-    for (int i = 0; i < butEnvr.buttonNum; i++)
-        if (poX > butEnvr.buttons[i].poX && poX < butEnvr.buttons[i].poX + butEnvr.buttons[i].buttonWidth &&
-            poY < butEnvr.buttons[i].poY && poY > butEnvr.buttons[i].poY - butEnvr.buttons[i].buttonHeight)
-            return butEnvr.buttons[i].tag;
-
-    return none_wc;
-
-}
-
 void addButton(ButtonEnvr & butEnvr, Button & but) {
     butEnvr.buttons[butEnvr.buttonNum++] = but;
-}
-
-void changeButtonPos(Button &but, const Pos pos, bool tag) {
-
-    if (tag) {
-        but.xs = pos.x;
-        but.ys = pos.y;
-    }
-    else {
-        but.xe = pos.x;
-        but.ye = pos.y;
-    }
-
 }
 
 void ini_panel (Panel & pal, int poX, int poY) {
@@ -92,4 +67,47 @@ Color_wc changeColor (PanelTag pTag) {
         default:
             break;
     }
+}
+
+void ini_MFButton(MFButton & but, Tag tag, int poX, int poY) {
+
+    but.tag = tag;
+    ini_button(but.buttonAttribute, poX, poY);
+
+}
+
+void ini_MFButtonSet (MFButtonSet & butSet) {
+
+    butSet.buttonNum = 0;
+
+}
+
+void addMFButton (MFButtonSet & butSet, MFButton & but) {
+
+    butSet.mfButtons[butSet.buttonNum++] = but;
+
+}
+
+Tag checkMFButton (const MFButtonSet & butSet, int poX, int poY) {
+
+    for (int i = 0; i < butSet.buttonNum; i++)
+        if (poX > butSet.mfButtons[i].buttonAttribute.poX && poX < butSet.mfButtons[i].buttonAttribute.poX + butSet.mfButtons[i].buttonAttribute.buttonWidth &&
+            poY < butSet.mfButtons[i].buttonAttribute.poY && poY > butSet.mfButtons[i].buttonAttribute.poY - butSet.mfButtons[i].buttonAttribute.buttonHeight)
+            return butSet.mfButtons[i].tag;
+
+    return none_wc;
+
+}
+
+void changeMFButtonPos(MFButton & but, const Pos pos, bool tag) {
+
+    if (tag) {
+        but.xs = pos.x;
+        but.ys = pos.y;
+    }
+    else {
+        but.xe = pos.x;
+        but.ye = pos.y;
+    }
+
 }

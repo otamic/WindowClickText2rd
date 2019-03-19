@@ -5,7 +5,20 @@
 #include "picElem_wc.h"
 #include "tool_wc.h"
 
-void lineBresenham (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
+static void circlePlotPoints (const Paper & pap, int xc, int yc, int x, int y,  void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
+
+    setPixel (pap, xc + x, yc + y, col);
+    setPixel (pap, xc - x, yc + y, col);
+    setPixel (pap, xc + x, yc - y, col);
+    setPixel (pap, xc - x, yc - y, col);
+    setPixel (pap, xc + y, yc + x, col);
+    setPixel (pap, xc - y, yc + x, col);
+    setPixel (pap, xc + y, yc - x, col);
+    setPixel (pap, xc - y, yc - x, col);
+
+}
+
+void lineBresenham (const Paper & pap, const MFButton & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
 
     int xs = but.xs, ys = but.ys, xe = but.xe, ye = but.ye;
 
@@ -55,9 +68,10 @@ void lineBresenham (const Paper & pap, const Button & but, void setPixel (const 
         else
             setPixel(pap, y, x, col);
     }
+
 }
 
-void rectanglePic (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
+void rectanglePic (const Paper & pap, const MFButton & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
 
     int x1 = but.xs < but.xe ? but.xs : but.xe, x2 = but.xs + but.xe - x1;
     int y1 = but.ys > but.ye ? but.ys : but.ye, y2 = but.ys + but.ye - y1;
@@ -73,20 +87,7 @@ void rectanglePic (const Paper & pap, const Button & but, void setPixel (const P
 
 }
 
-static void circlePlotPoints (const Paper & pap, int xc, int yc, int x, int y,  void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
-
-    setPixel (pap, xc + x, yc + y, col);
-    setPixel (pap, xc - x, yc + y, col);
-    setPixel (pap, xc + x, yc - y, col);
-    setPixel (pap, xc - x, yc - y, col);
-    setPixel (pap, xc + y, yc + x, col);
-    setPixel (pap, xc - y, yc + x, col);
-    setPixel (pap, xc + y, yc - x, col);
-    setPixel (pap, xc - y, yc - x, col);
-
-}
-
-void circleMidpoint (const Paper & pap, const Button & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
+void circleMidpoint (const Paper & pap, const MFButton & but, void setPixel (const Paper &, int, int, Color_wc), Color_wc col) {
 
     int radius = (int) wc_sqrtf( (but.xs - but.xe) * (but.xs - but.xe) + (but.ys - but.ye) * (but.ys - but.ye) );
     int p = 1 - radius;

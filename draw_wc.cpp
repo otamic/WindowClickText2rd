@@ -42,7 +42,6 @@ void drawPaper(const Paper & pap, bool hasLines) {
 
 void drawString(const char * s, int poX, int poY) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glRasterPos2i(poX, poY);
     int len = strlen(s);
@@ -53,7 +52,6 @@ void drawString(const char * s, int poX, int poY) {
 
 void drawString(const char * s) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     int len = strlen(s);
     for (int i = 0; i < len; i++)
@@ -63,7 +61,6 @@ void drawString(const char * s) {
 
 void drawNum(int num, int poX, int poY) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glRasterPos2i(poX, poY);
     int snum[10] = {0}, len = 0;
@@ -80,7 +77,6 @@ void drawNum(int num, int poX, int poY) {
 
 void drawNum(int num) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     int snum[10] = {0}, len = 0;
     if (num == 0)
@@ -96,7 +92,6 @@ void drawNum(int num) {
 
 static void drawButton(const Button & but) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glBegin(GL_LINE_LOOP);
     glVertex2i(but.poX, but.poY);
@@ -104,7 +99,13 @@ static void drawButton(const Button & but) {
     glVertex2i(but.poX + but.buttonWidth, but.poY - but.buttonHeight);
     glVertex2i(but.poX + but.buttonWidth, but.poY);
     glEnd();
-    drawString(buttonS[but.tag], but.poX + 2, but.poY - but.buttonHeight / 2);
+
+}
+
+static void drawMFButton (const MFButton & but) {
+
+    drawButton(but.buttonAttribute);
+    drawString(buttonS[but.tag], but.buttonAttribute.poX + 2, but.buttonAttribute.poY - but.buttonAttribute.buttonHeight / 2);
 
 }
 
@@ -112,6 +113,13 @@ void drawButtons(const ButtonEnvr & butEnvr) {
 
     for (int i = 0; i < butEnvr.buttonNum; i++)
         drawButton(butEnvr.buttons[i]);
+
+}
+
+void drawMFButtons (const MFButtonSet & buttonSet) {
+
+    for (int i = 0; i < buttonSet.buttonNum; i++)
+        drawMFButton(buttonSet.mfButtons[i]);
 
 }
 
@@ -141,7 +149,6 @@ void drawPanel (const Panel pal) {
 
 void text_draw_info(Tag tag) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glRasterPos2i(10, 90);
     switch(tag) {
@@ -189,7 +196,6 @@ void text_draw_info (PanelTag tag) {
 
 void text_draw_keyInfo (bool isInput) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glRasterPos2i (10, 60);
     drawString ("Are you sure to ");
@@ -203,7 +209,6 @@ void text_draw_keyInfo (bool isInput) {
 
 void text_draw_other() {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
     glColor3b (127, 127, 127);
     glBegin(GL_LINES);
     glVertex2i(100,700);
@@ -245,84 +250,15 @@ void text_lineDDA(const Paper & pap, const Button & but) {
 }
  */
 
-/*
-void text_lineBres (Paper & pap, const Button & but) {
-
-    glColor3f(0.0f, 0.0f, 0.0f);
-
-    int xs = but.xs, ys = but.ys, xe = but.xe, ye = but.ye;
-
-    int dx = wc_abs(xe - xs), dy = wc_abs(ye - ys);
-
-    bool tag = true;
-
-    if (dx < dy) {
-        wc_swap(dx, dy);
-        wc_swap(xs, ys);
-        wc_swap(xe, ye);
-        tag = false;
-    }
-
-    int p = 2 * dy - dx;
-    int twoDy = 2 * dy, twoDyMinusDx = 2 * (dy - dx);
-    int x, y, add = 1;
-
-    if (xs > xe) {
-        x = xe;
-        y = ye;
-        xe = xs;
-        if (y > ys)
-            add = -1;
-    }
-    else {
-        x = xs;
-        y = ys;
-        if (y > ye)
-            add = -1;
-    }
-    if (tag)
-        setPoint(pap, x, y);
-    else
-        setPoint(pap, y, x);
-
-    while(x < xe) {
-        x++;
-        if (p < 0)
-            p += twoDy;
-        else {
-            y += add;
-            p += twoDyMinusDx;
-        }
-        if (tag)
-            setPoint(pap, x, y);
-        else
-            setPoint(pap, y, x);
-    }
-}
- */
-
-
-void text_lineBres (Paper & pap, const Button & but, Color_wc col) {
-
-//  glColor3f(0.0f, 0.0f, 0.0f);
-//  glColor3b (col.red, col.green, col.blue);
+void text_lineBres (Paper & pap, const MFButton & but, Color_wc col) {
     lineBresenham(pap, but, setPoint, col);
-
 }
 
-void text_roudBres (Paper & pap, const Button & but, Color_wc col) {
-
-//  glColor3f(0.0f, 0.0f, 0.0f);
-//  glColor3b (col.red, col.green, col.blue);
+void text_roudBres (Paper & pap, const MFButton & but, Color_wc col) {
     circleMidpoint(pap, but, setPoint, col);
-
 }
 
-void text_rect (Paper & pap, const Button & but, Color_wc col) {
-
-//  glColor3f(0.0f, 0.0f, 0.0f);
-//  glColor3b (col.red, col.green, col.blue);
+void text_rect (Paper & pap, const MFButton & but, Color_wc col) {
     rectanglePic(pap, but, setPoint, col);
-
 }
 
