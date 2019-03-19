@@ -38,14 +38,14 @@ void lineDDA (Paper & pap, int xs, int ys, int xe, int ye) {
 }
  */
 
-void lineBres (Paper & pap, const Button & but, Color_wc col) {
-    lineBresenham(pap, but, setPixel, col);
+void lineBres (Paper & pap, const MFButton & but, Color_wc col) {
+    lineBresenham (pap, but, setPixel, col);
 }
 
-void roudBres (Paper & pap, const Button & but, Color_wc col) {
-    circleMidpoint(pap, but, setPixel, col);
+void roudBres (Paper & pap, const MFButton & but, Color_wc col) {
+    circleMidpoint (pap, but, setPixel, col);
 }
 
-void rect (Paper & pap, const Button & but, Color_wc col) {
+void rect (Paper & pap, const MFButton & but, Color_wc col) {
     rectanglePic (pap, but, setPixel, col);
 }

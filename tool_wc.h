@@ -5,9 +5,9 @@
 #ifndef WINDOWCLICKTEXT2RD_TOOL_WC_H
 #define WINDOWCLICKTEXT2RD_TOOL_WC_H
 
-/*
- * 工具集
- */
+/************************************
+ * Tool kit
+ ************************************/
 
 int wc_round (const float a);
 int wc_abs (int a);

@@ -76,14 +76,30 @@ void loadOut(Paper & pap) {
 
 }
 
-Pos getPoint (Paper & pap, int poX, int poY, int Height) {
+Pos getPoint (Paper & pap, int poX, int poY) {
 
     Pos t;
     t.x = (poX - pap.abX) / pap.squreSize;
-    t.y = (poY - Height + pap.abY) / pap.squreSize;
+    t.y = (pap.paperHeight * pap.squreSize - pap.abY + poY) / pap.squreSize;
 
 //  if (x >= 0 && x <= pap.paperWidth && y >= 0 && y <= pap.paperHeight)
 //  没有检测是不是在图内
     return t;
+
+}
+
+void ini_paper (Paper & pap, int poX, int poY) {
+
+    pap.paper = (Color_wc **) malloc(pap.paperHeight * sizeof(Color_wc *));
+    for (int i = 0; i < pap.paperHeight; i++)
+        pap.paper[i] = (Color_wc *) malloc(pap.paperWidth * sizeof(Color_wc));
+
+
+    for (int i = 0; i < pap.paperHeight; i++)
+        for (int j = 0; j < pap.paperWidth; j++)
+            pap.paper[i][j].red = pap.paper[i][j].green = pap.paper[i][j].blue = 127;
+
+    pap.abX = poX;
+    pap.abY = poY;
 
 }

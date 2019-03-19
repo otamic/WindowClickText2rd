@@ -4,13 +4,12 @@
 
 #include "button_wc.h"
 
-void ini_button(Button & but, Tag tag, int poX, int poY) {
+void ini_button (Button & but, int poX, int poY) {
 
-    but.tag = tag;
-    but.buttonHeight = BUTTONHEIGHT;
-    but.buttonWidth = BUTTONWIDTH;
     but.poX = poX;
     but.poY = poY;
+    but.buttonHeight = BUTTONHEIGHT;
+    but.buttonWidth = BUTTONWIDTH;
 
 }
 
@@ -18,32 +17,8 @@ void ini_buttonEnvr(ButtonEnvr & butEnvr) {
     butEnvr.buttonNum = 0;
 }
 
-Tag checkButton(const ButtonEnvr & butEnvr, int poX, int poY) {
-
-    for (int i = 0; i < butEnvr.buttonNum; i++)
-        if (poX > butEnvr.buttons[i].poX && poX < butEnvr.buttons[i].poX + butEnvr.buttons[i].buttonWidth &&
-            poY < butEnvr.buttons[i].poY && poY > butEnvr.buttons[i].poY - butEnvr.buttons[i].buttonHeight)
-            return butEnvr.buttons[i].tag;
-
-    return none_wc;
-
-}
-
 void addButton(ButtonEnvr & butEnvr, Button & but) {
     butEnvr.buttons[butEnvr.buttonNum++] = but;
-}
-
-void changeButtonPos(Button &but, const Pos pos, bool tag) {
-
-    if (tag) {
-        but.xs = pos.x;
-        but.ys = pos.y;
-    }
-    else {
-        but.xe = pos.x;
-        but.ye = pos.y;
-    }
-
 }
 
 void ini_panel (Panel & pal, int poX, int poY) {
@@ -57,19 +32,19 @@ void ini_panel (Panel & pal, int poX, int poY) {
 
 PanelTag checkPanel (const Panel & pal, int poX, int poY) {
 
-    int x = poX - pal.poX, y = poY - pal.poY + pal.panelHeight;
+    int x = poX - pal.poX, y = pal.poY - poY;
 
-    if (poX > 5 && poX < 35 && poY > 5 && poY < 35)
+    if (x > 5 && x < 35 && y > 5 && y < 35)
         return blank_wc;
-    else if (poX > 5 && poX < 35 && poY > 35 && poY < 65)
+    else if (x > 5 && x < 35 && y > 35 && y < 65)
         return green_wc;
-    else if (poX > 35 && poX < 65 && poY > 5 && poY < 35)
+    else if (x > 35 && x < 65 && y > 5 && y < 35)
         return white_wc;
-    else if (poX > 35 && poX < 65 && poY > 35 && poY < 65)
+    else if (x > 35 && x < 65 && y > 35 && y < 65)
         return blue_wc;
-    else if (poX > 65 && poX < 95 && poY > 5 && poY < 35)
+    else if (x > 65 && x < 95 && y > 5 && y < 35)
         return red_wc;
-    else if (poX > 5 && poX < 55 && poY > 570 && poY < 590)         // warning! Can't use in the other place!
+    else if (x > 5 && x < 55 && y > 570 && y < 590)
         return back_wc;
     else
         return nothing_wc;
@@ -92,4 +67,47 @@ Color_wc changeColor (PanelTag pTag) {
         default:
             break;
     }
+}
+
+void ini_MFButton(MFButton & but, Tag tag, int poX, int poY) {
+
+    but.tag = tag;
+    ini_button(but.buttonAttribute, poX, poY);
+
+}
+
+void ini_MFButtonSet (MFButtonSet & butSet) {
+
+    butSet.buttonNum = 0;
+
+}
+
+void addMFButton (MFButtonSet & butSet, MFButton & but) {
+
+    butSet.mfButtons[butSet.buttonNum++] = but;
+
+}
+
+Tag checkMFButton (const MFButtonSet & butSet, int poX, int poY) {
+
+    for (int i = 0; i < butSet.buttonNum; i++)
+        if (poX > butSet.mfButtons[i].buttonAttribute.poX && poX < butSet.mfButtons[i].buttonAttribute.poX + butSet.mfButtons[i].buttonAttribute.buttonWidth &&
+            poY < butSet.mfButtons[i].buttonAttribute.poY && poY > butSet.mfButtons[i].buttonAttribute.poY - butSet.mfButtons[i].buttonAttribute.buttonHeight)
+            return butSet.mfButtons[i].tag;
+
+    return none_wc;
+
+}
+
+void changeMFButtonPos(MFButton & but, const Pos pos, bool tag) {
+
+    if (tag) {
+        but.xs = pos.x;
+        but.ys = pos.y;
+    }
+    else {
+        but.xe = pos.x;
+        but.ye = pos.y;
+    }
+
 }
