@@ -63,7 +63,7 @@ PanelTag checkPanel (const Panel & pal, int poX, int poY) {
         return blank_wc;
     else if (x > 5 && x < 35 && y > 35 && y < 65)
         return green_wc;
-    else if (x > 35 && y < 65 && y > 5 && y < 35)
+    else if (x > 35 && x < 65 && y > 5 && y < 35)
         return white_wc;
     else if (x > 35 && x < 65 && y > 35 && y < 65)
         return blue_wc;

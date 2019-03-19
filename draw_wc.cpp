@@ -11,27 +11,17 @@ void setPoint(const Paper & pap, int x, int y, Color_wc col) {
 
     glColor3b (col.red, col.green, col.blue);
     if (y >= 0 && y <= pap.paperHeight && x >= 0 && x <= pap.paperWidth)
-        glRecti(pap.abX + x * pap.squreSize, pap.abY - (y + 1) * pap.squreSize, pap.abX + (x + 1) * pap.squreSize, pap.abY - y * pap.squreSize);
+        glRecti(pap.abX + x * pap.squreSize, pap.abY - (pap.paperHeight - y) * pap.squreSize, pap.abX + (x + 1) * pap.squreSize, pap.abY - (pap.paperHeight - y - 1) * pap.squreSize);
 
 }
 
 void drawPaper(const Paper & pap, bool hasLines) {
 
-//  glColor3f(1.0f, 1.0f, 1.0f);
-    /*
-    glColor3b (127, 127, 127);
-    glRecti(pap.abX, pap.abY - pap.squreSize * pap.paperHeight, pap.abX + pap.squreSize * pap.paperWidth, pap.abY);
-    */
-
-//  glColor3f(0.0f, 0.0f, 0.0f);
-//  glColor3b (0, 0, 0);
     for (int i = 0; i < pap.paperHeight; i++)
         for (int j = 0; j < pap.paperWidth; j++)
             setPoint(pap, j, i, pap.paper[i][j]);
 
-
     if (hasLines) {
-//      glColor3f(0.2f, 0.2f, 0.2f);
         glColor3b (100, 100, 100);
         glLineWidth(0.5);
         glBegin(GL_LINES);
